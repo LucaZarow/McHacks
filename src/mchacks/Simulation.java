@@ -39,15 +39,23 @@ public class Simulation {
 		for(Body b1 : bodies) {
 			for(Body b2 : bodies) {
 				if(b1 == b2) continue;
+				b1.applyDeltaAcc(Physics.gravity(b1, b2));
 				
 				//Check collisions
 				if(b1.hasCollided(b2)) {
 					Body b3 = new Body();
 					b3.setMass(b1.getMass() + b2.getMass());
 					b3.setRadius(b1.getRadius());
+					
+					Vector resultant = Vector.sum(Vector.product(b1.getMass(), b1.getVel()), Vector.product(b2.getMass(), b2.getVel()));
+					resultant = Vector.product(1.0 / (b1.getMass() * b2.getMass()), resultant);
+					b3.setVel(resultant);
+					
+					bodies.remove(b1);
+					bodies.remove(b2);
+					bodies.add(b3);
+					break;
 				}
-				
-				b1.applyDeltaAcc(Physics.gravity(b1, b2));
 			}
 			
 			b1.update(dt);
