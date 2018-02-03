@@ -1,5 +1,8 @@
 package mchacks;
 
+import java.util.ArrayList;
+import mchacks.physics.Body;
+
 public class Simulation {
 	private boolean running;
 	private long framesPerSecond, updatesPerSecond;
@@ -7,8 +10,10 @@ public class Simulation {
 	private Thread renderThread = new RenderThread();
 	private Thread updateThread = new UpdateThread();
 	
+	public ArrayList<Body> bodies;
+	
 	public Simulation() {
-		
+		bodies = new ArrayList<Body>();
 	}
 	
 	public void start() {

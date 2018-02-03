@@ -1,6 +1,6 @@
-package mchacks;
+package mchacks.physics;
 
-import java.util.Vector;
+import mchacks.util.Vector;
 
 public class Body {	
 	private double mass; //kg 
@@ -69,5 +69,4 @@ public class Body {
 	public Vector setPos () {
 		return this.pos;
 	}
-	
 }
