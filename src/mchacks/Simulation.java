@@ -2,6 +2,7 @@ package mchacks;
 
 import java.util.ArrayList;
 import mchacks.physics.Body;
+import mchacks.physics.Physics;
 
 public class Simulation {
 	private boolean running;
@@ -28,7 +29,14 @@ public class Simulation {
 	}
 	
 	private void update(double dt) {
-		
+		for(Body b1 : bodies) {
+			for(Body b2 : bodies) {
+				if(b1 == b2) continue;
+				
+				b1.applyFoce(Physics.gravity(b1, b2));
+				b1.update(dt);
+			}
+		}
 	}
 	
 	private class RenderThread extends Thread {
