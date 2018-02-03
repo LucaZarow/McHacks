@@ -39,7 +39,7 @@ public class Body {
 		this.rotationSpeed = (2 * Math.PI * radius) / period;
 	}
 	
-	public void applyFoce(Vector force) {
+	public void applyForce(Vector force) {
 		//a = F / m
 		Vector deltaAcc = Vector.product(1.0 / this.mass, force);
 		

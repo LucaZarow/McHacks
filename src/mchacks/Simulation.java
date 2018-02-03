@@ -33,7 +33,7 @@ public class Simulation {
 			for(Body b2 : bodies) {
 				if(b1 == b2) continue;
 				
-				b1.applyFoce(Physics.gravity(b1, b2));
+				b1.applyForce(Physics.gravity(b1, b2));
 				b1.update(dt);
 			}
 		}
