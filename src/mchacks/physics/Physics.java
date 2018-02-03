@@ -6,11 +6,12 @@ public class Physics {
 	//m^3 * kg^-1 * s^-2
 	public static double G = 6.67384 * Math.pow(10, -11);
 	
-	public static Vector gravity(Body a, Body b) {		
-		Vector position = Vector.minus(a.getPos(), b.getPos());
+	//Effect of b2 on b1
+	public static Vector gravity(Body b1, Body b2) {		
+		Vector position = Vector.minus(b1.getPos(), b2.getPos());
 		
-		double force = G * (a.getMass() * b.getMass()) / (position.getMagnitude() * position.getMagnitude());
+		double deltaAcc = G * (b2.getMass()) / (position.getMagnitude() * position.getMagnitude());
 		
-		return Vector.product(force, position.getUnitVector());
+		return Vector.product(deltaAcc, position.getUnitVector());
 	}
 }

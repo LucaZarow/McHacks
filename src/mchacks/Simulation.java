@@ -3,6 +3,7 @@ package mchacks;
 import java.util.ArrayList;
 import mchacks.physics.Body;
 import mchacks.physics.Physics;
+import mchacks.util.Vector;
 
 public class Simulation {
 	private boolean running;
@@ -15,6 +16,12 @@ public class Simulation {
 	
 	public Simulation() {
 		bodies = new ArrayList<Body>();
+		
+		Body b = new Body(1, 1, 1);
+		b.setPos(new Vector(0, 0, 0));
+		b.setVel(new Vector(1, 0, 0));
+		
+		bodies.add(b);
 	}
 	
 	public void start() {
@@ -33,9 +40,17 @@ public class Simulation {
 			for(Body b2 : bodies) {
 				if(b1 == b2) continue;
 				
-				b1.applyForce(Physics.gravity(b1, b2));
-				b1.update(dt);
+				//Check collisions
+				if(b1.hasCollided(b2)) {
+					Body b3 = new Body();
+					b3.setMass(b1.getMass() + b2.getMass());
+					b3.setRadius(b1.getRadius());
+				}
+				
+				b1.applyDeltaAcc(Physics.gravity(b1, b2));
 			}
+			
+			b1.update(dt);
 		}
 	}
 	

@@ -39,10 +39,7 @@ public class Body {
 		this.rotationSpeed = (2 * Math.PI * radius) / period;
 	}
 	
-	public void applyForce(Vector force) {
-		//a = F / m
-		Vector deltaAcc = Vector.product(1.0 / this.mass, force);
-		
+	public void applyDeltaAcc(Vector deltaAcc) {
 		this.acc = Vector.sum(this.acc, deltaAcc);
 	}
 	
@@ -52,6 +49,12 @@ public class Body {
 		
 		Vector deltaPos = Vector.product(dt, this.vel);
 		this.pos = Vector.sum(this.pos, deltaPos);
+	}
+	
+	public boolean hasCollided(Body b) {
+		double distance = Vector.minus(this.getPos(), b.getPos()).getMagnitude();
+		
+		return distance < this.radius + b.getRadius();
 	}
 	
 	public double getMass () {
@@ -65,15 +68,24 @@ public class Body {
 	public Vector getPos () {
 		return this.pos;
 	}
-	public double setMass () {
-		return this.mass;
+	
+	public Vector getVel() {
+		return this.vel;
 	}
 	
-	public double setRadius () {
-		return this.radius;
+	public void setMass (double mass) {
+		this.mass = mass;
 	}
 	
-	public Vector setPos () {
-		return this.pos;
+	public void setRadius (double radius) {
+		this.radius = radius;
+	}
+	
+	public void setPos (Vector pos) {
+		this.pos = pos;
+	}
+	
+	public void setVel (Vector vel) {
+		this.vel = vel;
 	}
 }
