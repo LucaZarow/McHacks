@@ -1,11 +1,6 @@
 package mchacks;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.util.ArrayList;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import mchacks.physics.Body;
 import mchacks.physics.Physics;
@@ -16,53 +11,20 @@ import mchacks.graphics.GraphicsApp;
 
 public class Simulation implements Runnable {
 	private boolean running;
-	private long framesPerSecond, updatesPerSecond;
+	private long updatesPerSecond;
 	
-	public static double timeStepModifier = 3600;
+	public static double timeStepModifier = 360000;
 	
 	public ArrayList<Body> bodies;
 	
-	JFrame frame;
-	JPanel panel;
-	
 	public Simulation() {
-		bodies = SolarSystem.solSystem();
-		
-		frame = new JFrame();
-		frame.setVisible(true);
-		frame.setSize(400, 400);
-		
-		panel = new JPanel();
-		frame.add(panel);
+		bodies = SolarSystem.randomPlanetoids();
 	}
 	
 	public void start() {
 		new GraphicsApp(bodies);
 		running = true;
 		this.run();
-	}
-	
-	private void render() {
-		//Ugly 2D graphics
-		
-		Graphics2D g2d = (Graphics2D)panel.getGraphics();
-		g2d.setColor(new Color(0, 0, 0, 0));
-		g2d.clearRect(0, 0, panel.getWidth(), panel.getHeight());
-		
-		g2d.setColor(Color.black);
-		
-		for(Body b : bodies) {
-			int x = (int) (b.getPos().x / SolarSystem.scale) + 200;
-			int y = (int) (b.getPos().y / SolarSystem.scale) + 200;
-			int size = (int) (5 * (b.getRadius() / Physics.EARTH_RADIUS));
-			
-			x -= size / 2;
-			y -= size / 2;
-			
-			g2d.fillOval(x, y, 5, 5);
-		}
-		
-		panel.paintComponents(g2d);
 	}
 	
 	private void update(double dt) {
@@ -115,13 +77,10 @@ public class Simulation implements Runnable {
 			
 			if(timer > 1) {
 				timer -= 1;
-				System.out.println("Updates: " + updatesPerSecond + "\tFPS: " + framesPerSecond);
-
+				System.out.println("Updates: " + updatesPerSecond);
 				updatesPerSecond = 0;
-				framesPerSecond = 0;
 			}
 			update(dt * timeStepModifier);
-			render();
 			
 			//Sleep
 			try {
