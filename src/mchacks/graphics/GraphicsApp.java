@@ -26,23 +26,16 @@ import com.jogamp.opengl.util.FPSAnimator;
 import mchacks.physics.Body;
 
 public class GraphicsApp implements GLEventListener {
-    /**
-     * Creates a Basic GL Window and links it to a GLEventListener
-     * @param args
-     */
-    /** Class from mintools for setting the camera and viewing parameters with the mouse. */
+
     private TrackBallCamera tbc = new TrackBallCamera();
  
-    private Scene keyFramedScene;																					//animation
+    private Scene scene;												
 
-    /** Helper for recording images to the directory "stills", should you like to make a video of your character animation */
-    //private CanvasRecorder canvasRecorder = new CanvasRecorder();
-          
     public GraphicsApp(ArrayList<Body> bodies) {
     	
-    	keyFramedScene = new Scene (bodies);
+    	scene = new Scene (bodies);
     	
-        String windowName = "Space";//"Assignment 1 - " + CharacterCreator.name;
+        String windowName = "Space";
         GLProfile glp = GLProfile.getDefault();
         GLCapabilities glcap = new GLCapabilities(glp);
         GLCanvas glCanvas = new GLCanvas( glcap );
@@ -50,16 +43,13 @@ public class GraphicsApp implements GLEventListener {
         animator = new FPSAnimator(glCanvas, 30);
         animator.start();
  //       ControlFrame controls = new ControlFrame("Controls", new Dimension( 600,600 ), new Point(680,0) );
-      //  controls.add("Key Frame Controls", keyFramedScene.getControls() );									//resolve
-        //controls.add("Canvas Recorder Controls", canvasRecorder.getControls() );
  //       controls.setVisible(true);    
         JFrame frame = new JFrame(windowName);
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(glCanvas, BorderLayout.CENTER);
         glCanvas.setSize(1280,720); // 720p resolution
         
-        // Here we add ourselves as the GL event listener so that the display
-        // callback (see below) will be called
+
         glCanvas.addGLEventListener( this );
         
         tbc.attach( glCanvas );
@@ -70,9 +60,9 @@ public class GraphicsApp implements GLEventListener {
                     System.exit(0);
                 }
             });
-            frame.pack(); // want our frame to come out the right size!
+            frame.pack(); // size
             frame.setVisible(true);
-            glCanvas.requestFocus(); // activates the Event Listeners
+            glCanvas.requestFocus(); // event listener
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,70 +73,45 @@ public class GraphicsApp implements GLEventListener {
         GL2 gl = drawable.getGL().getGL2();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         tbc.prepareForDisplay(drawable);
-        keyFramedScene.display( drawable );											//--**--------------------
+        scene.display( drawable );						
     }
  
-    /** 
-     * initializes the canvas with some reasonable default settings
-     */
+
     @Override
     public void init(GLAutoDrawable drawable) {
         drawable.setGL(new DebugGL2(drawable.getGL().getGL2()));
         GL2 gl = drawable.getGL().getGL2();
         
-   //    gl.glTranslated(100, 100, 100);
-        
-    //    gl.glFrustum(-1.0, 1.0, -1.0, 1.0, 0.0, 900.0);
-        
-        gl.glClearColor(0f, 0f, 0f, 1f); // Black Background
-        gl.glClearDepth(1.0f); // Depth Buffer Setup
-        gl.glEnable(GL.GL_DEPTH_TEST); // Enables Depth Testing
-        gl.glDepthFunc(GL.GL_LEQUAL); // The Type Of Depth Testing To Do
-        gl.glEnable( GL2.GL_NORMALIZE ); // normals stay normal length under scale
-        
-        // Smooth lines and points are always nicer, so let's enable that feature
-        gl.glEnable( GL.GL_BLEND );
-        gl.glBlendFunc( GL.GL_SRC_ALPHA, GL.GL_ONE_MINUS_SRC_ALPHA );
-        gl.glEnable( GL.GL_LINE_SMOOTH );
-        gl.glEnable( GL2.GL_POINT_SMOOTH );        
-        
-        // setup lights and default material
+        gl.glClearColor(0f, 0f, 0f, 1f); 	// background
+        gl.glClearDepth(1.0f); 				// depth
+        gl.glEnable(GL.GL_DEPTH_TEST); 		
+        gl.glDepthFunc(GL.GL_LEQUAL); 		
+        gl.glEnable( GL2.GL_NORMALIZE ); 	// normailze
+
+        // lights
         gl.glMatrixMode(GL2.GL_MODELVIEW);
         gl.glLoadIdentity();        
         gl.glEnable( GL2.GL_LIGHTING );
         gl.glEnable( GL2.GL_LIGHT0 );
         
-        // WATCH OUT: need to provide homogeneous coordinates to many calls!! 
+        // homogenize
         gl.glLightfv( GL2.GL_LIGHT0, GL2.GL_POSITION, new float[] {10,10,10, 1}, 0 );
         gl.glLightfv( GL2.GL_LIGHT0, GL2.GL_AMBIENT, new float[] {0,0,0,1}, 0);
         gl.glLightModelfv( GL2.GL_LIGHT_MODEL_AMBIENT, new float[] {0.1f,0.1f,0.1f,1}, 0);
 
-        // Here we set up a default material.  The slower harder way, in comments,
-        // would set cyan on the front, magenta on the back, but we'll enable
-        // GL_COLOR_MATERIAL instead.  Just the same, we'll set the other default
-        // material properites such that we have white highlights (i.e., like 
-        // shiny plastic)
-        //final float[] cyan = new float[] {0,1,1,1}; // R G B A
-        //final float[] magenta = new float[] {1,0,1,1}; // R G B A
+        //materials
+
         final float[] white = new float[] {1,1,1,1}; // R G B A
-        //gl.glMaterialfv( GL.GL_FRONT, GL2.GL_AMBIENT_AND_DIFFUSE, cyan, 0 );
-        //gl.glMaterialfv( GL.GL_BACK, GL2.GL_AMBIENT_AND_DIFFUSE, magenta, 0 );
         gl.glMaterialfv( GL.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, white, 0 );
         gl.glMaterialf( GL.GL_FRONT_AND_BACK, GL2.GL_SHININESS, 50 );
-        // The following enable makes it easier to set material colours
-        // by using a glColor call
         gl.glEnable( GL2.GL_COLOR_MATERIAL);
-        // This call not only sets the drawing colour but will make
-        gl.glColor3f(1, 0, 0);        
      }
         
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int w, int h) {
-    	// do nothing
     }
 
     @Override
     public void dispose(GLAutoDrawable drawable) {
-    	// do nothing
     }
 }

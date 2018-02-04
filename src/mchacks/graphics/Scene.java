@@ -31,17 +31,12 @@ import mchacks.physics.Body;
 
 public class Scene {
 
-
-    /** 120 frames at 30 frames per section for 4 seconds of animation */
-    //private final int NUM_FRAMES = 120;
     
-    /** The root of the scene graph / character */
-    private DAGNode root = null;
+    private GraphicNode root = null;
     
-    /** Master list of degress of freedom */
     private List<DoubleParameter> dofList = new ArrayList<DoubleParameter>();
 
-    private JPanel vfpPosePanel; 
+//    private JPanel vfpPosePanel; 
     
     private VerticalFlowPanel vfpPose = new VerticalFlowPanel();
 
@@ -73,19 +68,14 @@ public class Scene {
     }
 
 	*/
-    /** 
-     * Creates the character.
-     * This can be called multiple times (i.e., when making edits and running in debug mode,
-     * or if the CharacteCreator loads from a file, or creates different characters for whatever
-     * reason).  Keyframes are deleted, and dofs are cleared and recreated from the new DAG.  
-     * Notice that the pose sliders interface is also rebuilt.
-     */
+
     public void createBody(ArrayList<Body> bodies) {
         dofList.clear();
         vfpPose.removeAll();
     	root = SystemCreator.create(bodies);
     	if ( root == null ) 
     		return;
+    /*
     	root.getDOFs( dofList );
     	int labelWidth = DoubleParameter.DEFAULT_SLIDER_LABEL_WIDTH;
     	int textWidth = DoubleParameter.DEFAULT_SLIDER_TEXT_WIDTH;
@@ -97,6 +87,7 @@ public class Scene {
     	}
     	DoubleParameter.DEFAULT_SLIDER_LABEL_WIDTH = labelWidth;
     	DoubleParameter.DEFAULT_SLIDER_TEXT_WIDTH = textWidth;
+    	*/
     }
     
 }

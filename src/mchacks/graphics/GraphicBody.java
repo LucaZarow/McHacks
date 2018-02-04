@@ -11,12 +11,6 @@ import mintools.parameters.DoubleParameter;
 public class GraphicBody extends GraphicNode{
 /*	
 	DoubleParameter txD;
-	DoubleParameter tyD;
-	DoubleParameter tzD;
-	DoubleParameter rxD;
-	DoubleParameter ryD;
-	DoubleParameter rzD;
-	DoubleParameter s;
 	*/
 	double s;
 	double tx;
@@ -36,12 +30,6 @@ public class GraphicBody extends GraphicNode{
 	public GraphicBody(String name, Body initBody, Vector colour, float alpha){
 		super(name);
 /*		dofs.add( txD = new DoubleParameter( name+" txD", 0, -10, 10 ) );		
-		dofs.add( tyD = new DoubleParameter( name+" tyD", 0, -10, 10 ) );
-		dofs.add( tzD = new DoubleParameter( name+" tzD", 0, -10, 10 ) );
-		dofs.add( rxD = new DoubleParameter( name+" rxD", 0, -180, 180 ) );		
-		dofs.add( ryD = new DoubleParameter( name+" ryD", 0, -180, 180 ) );
-		dofs.add( rzD = new DoubleParameter( name+" rzD", 0, -180, 180 ) );
-		dofs.add( s = new DoubleParameter( name+" s", 1, 1, 2 ) );
 		*/
 		this.body = initBody;
 		
@@ -52,9 +40,9 @@ public class GraphicBody extends GraphicNode{
 		tz=vec.z/scalePos;
 		s=initBody.getRadius()/scaleSize;
 		
-		r=colour.x;
-		g=colour.y;
-		b=colour.z;
+		r=colour.x;//Math.random();
+		g=colour.y;//Math.random();
+		b=colour.z;//Math.random();
 		a = alpha ;
 	}
 	
