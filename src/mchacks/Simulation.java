@@ -13,7 +13,7 @@ public class Simulation implements Runnable {
 	private boolean running;
 	private long updatesPerSecond;
 	
-	public static double timeStepModifier = 360000;
+	public static double timeStepModifier = 1 * 360000;
 	
 	public ArrayList<Body> bodies;
 	
@@ -22,9 +22,14 @@ public class Simulation implements Runnable {
 	}
 	
 	public void start() {
-		new GraphicsApp(bodies);
+		new GraphicsApp(this, bodies);
 		running = true;
 		this.run();
+	}
+	
+	public void stop() {
+
+			bodies=null;
 	}
 	
 	private void update(double dt) {

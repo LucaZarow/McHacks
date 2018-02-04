@@ -24,6 +24,7 @@ import mintools.viewer.TrackBallCamera;
 import com.jogamp.opengl.util.FPSAnimator;
 
 import mchacks.physics.Body;
+import mchacks.Simulation;
 
 public class GraphicsApp implements GLEventListener {
 
@@ -31,9 +32,9 @@ public class GraphicsApp implements GLEventListener {
  
     private Scene scene;												
 
-    public GraphicsApp(ArrayList<Body> bodies) {
+    public GraphicsApp(Simulation sim, ArrayList<Body> bodies) {
     	
-    	scene = new Scene (bodies);
+    	scene = new Scene (sim, bodies);
     	
         String windowName = "Space";
         GLProfile glp = GLProfile.getDefault();
@@ -42,8 +43,13 @@ public class GraphicsApp implements GLEventListener {
         final FPSAnimator animator; 
         animator = new FPSAnimator(glCanvas, 30);
         animator.start();
- //       ControlFrame controls = new ControlFrame("Controls", new Dimension( 600,600 ), new Point(680,0) );
- //       controls.setVisible(true);    
+        
+ /*       
+        ControlFrame controls = new ControlFrame("Controls", new Dimension( 600,600 ), new Point(680,0) );
+        controls.add("Scene Controls", scene.getControls() );
+        controls.setVisible(true);   
+   */     
+        
         JFrame frame = new JFrame(windowName);
         frame.getContentPane().setLayout(new BorderLayout());
         frame.getContentPane().add(glCanvas, BorderLayout.CENTER);
@@ -60,7 +66,7 @@ public class GraphicsApp implements GLEventListener {
                     System.exit(0);
                 }
             });
-            frame.pack(); // size
+            frame.pack();			// size
             frame.setVisible(true);
             glCanvas.requestFocus(); // event listener
         } catch (Exception e) {
@@ -86,7 +92,7 @@ public class GraphicsApp implements GLEventListener {
         gl.glClearDepth(1.0f); 				// depth
         gl.glEnable(GL.GL_DEPTH_TEST); 		
         gl.glDepthFunc(GL.GL_LEQUAL); 		
-        gl.glEnable( GL2.GL_NORMALIZE ); 	// normailze
+        gl.glEnable( GL2.GL_NORMALIZE ); 	// normalize
 
         // lights
         gl.glMatrixMode(GL2.GL_MODELVIEW);
@@ -100,7 +106,6 @@ public class GraphicsApp implements GLEventListener {
         gl.glLightModelfv( GL2.GL_LIGHT_MODEL_AMBIENT, new float[] {0.1f,0.1f,0.1f,1}, 0);
 
         //materials
-
         final float[] white = new float[] {1,1,1,1}; // R G B A
         gl.glMaterialfv( GL.GL_FRONT_AND_BACK, GL2.GL_SPECULAR, white, 0 );
         gl.glMaterialf( GL.GL_FRONT_AND_BACK, GL2.GL_SHININESS, 50 );
