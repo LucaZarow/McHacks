@@ -8,6 +8,7 @@ public class Physics {
 	
 	public static final double SOLAR_MASS = 1.989 * Math.pow(10, 30);
 	public static final double EARTH_MASS = 5.972 * Math.pow(10, 24);
+	public static final double JUPITER_MASS = 1.898 * Math.pow(10, 27);
 	
 	public static final double SOLAR_RADIUS = 695700000;
 	public static final double EARTH_RADIUS = 6400000;

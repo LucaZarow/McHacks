@@ -52,7 +52,6 @@ public class GraphicBody extends DAGNode{
 		s=initBody.getRadius()/scaleSize;//initBody.getRadius();
 		
 		
-		
 		r=Math.random();
 		g=Math.random();
 		b=Math.random();
@@ -63,7 +62,7 @@ public class GraphicBody extends DAGNode{
 		Vector vec = body.getPos();
 		tx=vec.x/scalePos;
 		ty=-vec.y/scalePos;
-		tz=-20;
+		tz=vec.z/scalePos;
 	}
 	
 	@Override

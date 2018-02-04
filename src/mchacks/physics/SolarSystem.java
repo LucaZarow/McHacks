@@ -58,7 +58,7 @@ public class SolarSystem {
 	public static ArrayList<Body> solSystem() {
 		ArrayList<Body >bodies = new ArrayList<Body>();
 		
-		Body sun = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS * 5, 1);
+		Body sun = new Body(Physics.SOLAR_MASS, Physics.SOLAR_RADIUS, 1);
 		sun.setPos(new Vector(0, 0, 0));
 		sun.setVel(new Vector(0, 0, 0));
 		bodies.add(sun);
@@ -74,7 +74,7 @@ public class SolarSystem {
 		bodies.add(venus);
 
 		Body earth = new Body(Physics.EARTH_MASS, Physics.EARTH_RADIUS, 1);
-		earth.setPos(new Vector(147.146*Math.pow(10, 9), 0, 0));
+		earth.setPos(new Vector(Physics.AU, 0, 0));
 		earth.setVel(new Vector(0, 30.29*Math.pow(10, 9), 0));
 		bodies.add(earth);
 		
