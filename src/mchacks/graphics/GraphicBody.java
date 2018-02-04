@@ -56,7 +56,7 @@ public class GraphicBody extends DAGNode{
 		r=Math.random();
 		g=Math.random();
 		b=Math.random();
-		a = alpha;
+		a =1 ;
 	}
 	
 	private void updatePosition(){
