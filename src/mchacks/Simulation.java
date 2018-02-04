@@ -24,6 +24,30 @@ public class Simulation implements Runnable {
 	public Simulation() {
 		bodies = new ArrayList<Body>();
 		
+		Body b3 = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS * 5, 1);
+		b3.setPos(new Vector(0, 0, 0));
+		b3.setVel(new Vector(0, 0, 0));
+		bodies.add(b3);
+		
+		for(int i = 0; i < 200; i++) {
+			double randomMass = Physics.EARTH_MASS / 2 + (Math.random() * Physics.EARTH_MASS / 2);
+			
+			double randomPosX = (2 * Math.random() * Physics.AU) - Physics.AU;
+			double randomPosY = (2 * Math.random() * Physics.AU) - Physics.AU;
+			double randomPosZ = (2 * Math.random() * Physics.AU) - Physics.AU;
+			
+			double randomVelX = (2 * Math.random() * 30000) - 15000;
+			double randomVelY = (2 * Math.random() * 30000) - 15000;
+			double randomVelZ = (2 * Math.random() * 30000) - 15000;
+			
+			Body b = new Body(randomMass, Physics.EARTH_RADIUS, 1);
+			b.setPos(new Vector(randomPosX, randomPosY, randomPosZ));
+			b.setVel(new Vector(randomVelX, randomVelY, randomVelZ));
+			
+			bodies.add(b);
+		}
+		
+		/*
 		Body b3 = new Body(1.989 * Math.pow(10, 30), 1, 1);
 		b3.setPos(new Vector(0, 0, 0));
 		b3.setVel(new Vector(0, 0, 0));
@@ -36,13 +60,15 @@ public class Simulation implements Runnable {
 		b2.setPos(new Vector(108000000000.0, 0, 0));
 		b2.setVel(new Vector(0, 35000, 0));
 		
+		
 		bodies.add(b);
 		bodies.add(b2);
 		bodies.add(b3);
 		
+		*/
+		
 		frame = new JFrame();
 		frame.setVisible(true);
-		Dimension size = new Dimension(400, 400);
 		frame.setSize(400, 400);
 		
 		panel = new JPanel();
@@ -59,7 +85,9 @@ public class Simulation implements Runnable {
 	}
 	
 	private void update(double dt) {
-		for(Body b1 : bodies) {
+		double barycenter = 0;
+		
+		outerloop: for(Body b1 : bodies) {
 			for(Body b2 : bodies) {
 				if(b1 == b2) continue;
 				b1.applyDeltaAcc(Physics.gravity(b1, b2));
@@ -81,10 +109,13 @@ public class Simulation implements Runnable {
 					resultant = Vector.product(1.0 / (b1.getMass() * b2.getMass()), resultant);
 					b3.setVel(resultant);
 					
+					//New position
+					b3.setPos(b1.getPos());
+					
 					bodies.remove(b1);
 					bodies.remove(b2);
 					bodies.add(b3);
-					break;
+					break outerloop;
 				}
 			}
 			
@@ -100,8 +131,12 @@ public class Simulation implements Runnable {
 		for(Body b : bodies) {
 			int x = (int) (b.getPos().x / 1490000000.0) + 200;
 			int y = (int) (b.getPos().y / 1490000000.0) + 200;
+			int size = (int) (5 * (b.getRadius() / Physics.EARTH_RADIUS));
 			
-			g2d.fillOval(x, y, 5, 5);
+			x -= size / 2;
+			y -= size / 2;
+			
+			g2d.fillOval(x, y, size, size);
 		}
 		
 		panel.paintComponents(g2d);
@@ -123,12 +158,11 @@ public class Simulation implements Runnable {
 			if(timer > 1) {
 				timer -= 1;
 				System.out.println("Updates: " + updatesPerSecond + "\tFPS: " + framesPerSecond);
-				System.out.println("Body count " + bodies.size());
-				
+
 				updatesPerSecond = 0;
 				framesPerSecond = 0;
 			}
-			update(dt * 360000);
+			update(dt * 3600);
 			
 			//Sleep
 			try {
