@@ -21,11 +21,14 @@ public class Simulation implements Runnable {
 	}
 	
 	public void start() {
-		new GraphicsApp(bodies);
+		new GraphicsApp(this, bodies);
 		running = true;
 		this.run();
 	}
-	
+		public void stop() {
+			bodies=null;
+	}
+
 	private void update(double dt) {	
 		outerloop: for(Body b1 : bodies) {
 			for(Body b2 : bodies) {
