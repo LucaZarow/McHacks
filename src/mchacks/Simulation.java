@@ -11,14 +11,13 @@ import mchacks.graphics.GraphicsApp;
 
 public class Simulation implements Runnable {
 	private boolean running;
-	private long updatesPerSecond;
 	
 	public static double timeStepModifier = 1 * 360000;
 	
 	public ArrayList<Body> bodies;
 	
 	public Simulation() {
-		bodies = SolarSystem.randomDisk(40);
+		bodies = SolarSystem.randomDisk(30);
 	}
 	
 	public void start() {
@@ -74,7 +73,6 @@ public class Simulation implements Runnable {
 			double dt = (now - then) / 1000000000.0;
 			
 			timer += dt;
-			updatesPerSecond++;
 			
 			update(dt * timeStepModifier);
 			
