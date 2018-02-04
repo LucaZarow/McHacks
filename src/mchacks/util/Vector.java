@@ -46,4 +46,9 @@ public class Vector {
 		
 		return new Vector(x, y, z);
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("X:%f, Y:%f, Z:%f", x, y, z);
+	}
 }

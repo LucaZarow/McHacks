@@ -12,6 +12,6 @@ public class Physics {
 		
 		double deltaAcc = G * (b2.getMass()) / (position.getMagnitude() * position.getMagnitude());
 		
-		return Vector.product(deltaAcc, position.getUnitVector());
+		return Vector.product(-deltaAcc, position.getUnitVector());
 	}
 }
