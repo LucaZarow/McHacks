@@ -18,7 +18,7 @@ public class Simulation implements Runnable {
 	public ArrayList<Body> bodies;
 	
 	public Simulation() {
-		bodies = SolarSystem.randomPlanetoids(400);
+		bodies = SolarSystem.randomDisk();
 	}
 	
 	public void start() {
@@ -76,11 +76,6 @@ public class Simulation implements Runnable {
 			timer += dt;
 			updatesPerSecond++;
 			
-			if(timer > 1) {
-				timer -= 1;
-				System.out.println("Updates: " + updatesPerSecond);
-				updatesPerSecond = 0;
-			}
 			update(dt * timeStepModifier);
 			
 			//Sleep

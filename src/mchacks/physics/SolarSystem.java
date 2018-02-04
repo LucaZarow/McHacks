@@ -43,6 +43,44 @@ public class SolarSystem {
 		return bodies;
 	}
 	
+	public static ArrayList<Body> randomDisk() {
+		ArrayList<Body> bodies = new ArrayList<Body>();
+		
+		int num = 10;
+		
+		Body sun = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS);
+		sun.setPos(new Vector(0, 0, 0));
+		sun.setVel(new Vector(0, 0, 0));
+		bodies.add(sun);
+		
+		for(int i = 0; i < num; i++) {
+			double massRandomizer = Math.random() * 4;
+			double randomMass;
+			if(massRandomizer < 2)
+				randomMass = Physics.EARTH_MASS / 20000.0;
+			else if(massRandomizer < 3)
+				randomMass = Physics.EARTH_MASS / 2 + (Math.random() * Physics.EARTH_MASS / 2);
+			else
+				randomMass = Physics.JUPITER_MASS;
+
+			double randomPosX = (2 * Math.random() * Physics.AU) - Physics.AU;
+			double randomPosY = (2 * Math.random() * Physics.AU) - Physics.AU;
+			//double randomPosZ = (2 * Math.random() * Physics.AU) - Physics.AU;
+			double randomPosZ = 0;
+			
+			Body b = new Body(randomMass, Physics.EARTH_RADIUS);
+			b.setPos(new Vector(randomPosX, randomPosY, randomPosZ));
+			
+			Vector vel = new Vector(-b.getPos().y, b.getPos().x, 0);
+			vel = Vector.product(Physics.circularOrbit(sun, b.getPos().getMagnitude()), vel.getUnitVector());
+			
+			b.setVel(vel);
+			
+			bodies.add(b);
+		}
+		return bodies;
+	}
+	
 	public static ArrayList<Body> pluto() {
 		ArrayList<Body> bodies = new ArrayList<Body>();
 		
