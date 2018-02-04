@@ -13,7 +13,7 @@ public class Simulation implements Runnable {
 	private boolean running;
 	private long updatesPerSecond;
 	
-	public static double timeStepModifier = 3 * 360000;
+	public static double timeStepModifier = 1 * 360000;
 	
 	public ArrayList<Body> bodies;
 	
@@ -33,6 +33,7 @@ public class Simulation implements Runnable {
 				if(b1 == b2) continue;
 				b1.applyDeltaAcc(Physics.gravity(b1, b2));
 				
+				/*
 				//Check collisions
 				if(b1.hasCollided(b2)) {					
 					//New mass
@@ -51,9 +52,11 @@ public class Simulation implements Runnable {
 					b1.setVel(resultant);
 					
 					bodies.remove(b2);
+					//b2 = null;
 					
 					break outerloop;
 				}
+				*/
 			}
 				
 			b1.update(dt);

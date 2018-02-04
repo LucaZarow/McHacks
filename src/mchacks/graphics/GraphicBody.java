@@ -55,8 +55,9 @@ public class GraphicBody extends GraphicNode{
 	
 	@Override
 	public void display(GLAutoDrawable drawable) {
-		if ( body == null ) 
-			return;
+		if ( body == null ) {
+			this.a = 0;
+		}
 		
 		updatePosition();
 		
