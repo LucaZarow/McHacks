@@ -63,7 +63,7 @@ public class GraphicBody extends DAGNode{
 		Vector vec = body.getPos();
 		tx=vec.x/scalePos;
 		ty=-vec.y/scalePos;
-		tz=-20;
+		tz=vec.z/scalePos;
 	}
 	
 	@Override
