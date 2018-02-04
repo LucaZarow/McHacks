@@ -9,8 +9,12 @@ public class Physics {
 	//Effect of b2 on b1
 	public static Vector gravity(Body b1, Body b2) {		
 		Vector position = Vector.minus(b1.getPos(), b2.getPos());
-		
 		double deltaAcc = G * (b2.getMass()) / (position.getMagnitude() * position.getMagnitude());
+		
+		Vector resultant = Vector.product(-deltaAcc, position.getUnitVector());
+		
+		System.out.println(resultant);
+		
 		
 		return Vector.product(-deltaAcc, position.getUnitVector());
 	}

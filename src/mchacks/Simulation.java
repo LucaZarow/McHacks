@@ -24,16 +24,21 @@ public class Simulation implements Runnable {
 	public Simulation() {
 		bodies = new ArrayList<Body>();
 		
+		Body b3 = new Body(1.989 * Math.pow(10, 30), 1, 1);
+		b3.setPos(new Vector(0, 0, 0));
+		b3.setVel(new Vector(0, 0, 0));
+		
 		Body b = new Body(5.972 * Math.pow(10, 24), 1, 1);
-		b.setPos(new Vector(0, 0, 0));
-		b.setVel(new Vector(0, 0, 0));
+		b.setPos(new Vector(149000000000.0, 0, 0));
+		b.setVel(new Vector(0, 30000, 0));
 		
 		Body b2 = new Body(7.342 * Math.pow(10, 22), 1, 1);
-		b2.setPos(new Vector(383400000, 0, 0));
-		b2.setVel(new Vector(0, 1000, 0));
+		b2.setPos(new Vector(108000000000.0, 0, 0));
+		b2.setVel(new Vector(0, 35000, 0));
 		
 		bodies.add(b);
 		bodies.add(b2);
+		bodies.add(b3);
 		
 		frame = new JFrame();
 		frame.setVisible(true);
@@ -93,8 +98,8 @@ public class Simulation implements Runnable {
 		g2d.setColor(Color.black);
 		
 		for(Body b : bodies) {
-			int x = (int) (b.getPos().x / 3834000) + 200;
-			int y = (int) (b.getPos().y / 3834000) + 200;
+			int x = (int) (b.getPos().x / 1490000000.0) + 200;
+			int y = (int) (b.getPos().y / 1490000000.0) + 200;
 			
 			g2d.fillOval(x, y, 5, 5);
 		}
@@ -120,14 +125,10 @@ public class Simulation implements Runnable {
 				System.out.println("Updates: " + updatesPerSecond + "\tFPS: " + framesPerSecond);
 				System.out.println("Body count " + bodies.size());
 				
-				for(Body b : bodies) {
-					System.out.println(Vector.product(1.0 / 383400000, b.getPos()));
-				}
-				
 				updatesPerSecond = 0;
 				framesPerSecond = 0;
 			}
-			update(dt * 1000);
+			update(dt * 360000);
 			
 			//Sleep
 			try {

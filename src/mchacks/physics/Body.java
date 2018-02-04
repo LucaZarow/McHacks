@@ -49,6 +49,8 @@ public class Body {
 		
 		Vector deltaPos = Vector.product(dt, this.vel);
 		this.pos = Vector.sum(this.pos, deltaPos);
+		
+		this.acc = new Vector();
 	}
 	
 	public boolean hasCollided(Body b) {
