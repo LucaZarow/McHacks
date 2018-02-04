@@ -16,8 +16,15 @@ public class SolarSystem {
 		bodies.add(sun);
 		
 		for(int i = 0; i < 300; i++) {
-			double randomMass = Physics.EARTH_MASS / 2 + (Math.random() * Physics.EARTH_MASS / 2);
-			
+			double massRandomizer = Math.random() * 4;
+			double randomMass;
+			if(massRandomizer < 2)
+				randomMass = Physics.EARTH_MASS / 20000.0;
+			else if(massRandomizer < 3)
+				randomMass = Physics.EARTH_MASS / 2 + (Math.random() * Physics.EARTH_MASS / 2);
+			else
+				randomMass = Physics.JUPITER_MASS;
+
 			double randomPosX = (2 * Math.random() * Physics.AU) - Physics.AU;
 			double randomPosY = (2 * Math.random() * Physics.AU) - Physics.AU;
 			double randomPosZ = (2 * Math.random() * Physics.AU) - Physics.AU;
