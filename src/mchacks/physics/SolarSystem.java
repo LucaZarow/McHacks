@@ -5,10 +5,12 @@ import java.util.ArrayList;
 import mchacks.util.Vector;
 
 public class SolarSystem {
+	public static double scale = 1490000000.0;
+	
 	public static ArrayList<Body> randomPlanetoids() {
-		ArrayList<Body >bodies = new ArrayList<Body>();
+		ArrayList<Body> bodies = new ArrayList<Body>();
 		
-		Body sun = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS * 5, 1);
+		Body sun = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS, 1);
 		sun.setPos(new Vector(0, 0, 0));
 		sun.setVel(new Vector(0, 0, 0));
 		bodies.add(sun);
@@ -26,11 +28,30 @@ public class SolarSystem {
 			Vector vel = new Vector(-b.getPos().y, b.getPos().x, 0);
 			vel = Vector.product(Physics.circularOrbit(sun, b.getPos().getMagnitude()), vel.getUnitVector());
 			
-			System.out.println(vel);
 			b.setVel(vel);
 			
 			bodies.add(b);
 		}
+		return bodies;
+	}
+	
+	public static ArrayList<Body> pluto() {
+		ArrayList<Body> bodies = new ArrayList<Body>();
+		
+		Body pluto = new Body(1.3 * Math.pow(10, 22), 1188000, 1);
+		Body charon = new Body(1.55 * Math.pow(10, 21), 600000, 1);
+		
+		charon.setPos(new Vector(17500000, 0, 0));
+		
+		Vector vel = new Vector(-charon.getPos().y, charon.getPos().x, 0);
+		Vector velChar = Vector.product(Physics.circularOrbit(pluto, charon.getPos().getMagnitude()), vel.getUnitVector());
+		charon.setVel(velChar);
+		
+		bodies.add(pluto);
+		bodies.add(charon);
+		
+		scale = charon.getPos().getMagnitude() / 100;
+		
 		return bodies;
 	}
 	
