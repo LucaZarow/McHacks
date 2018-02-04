@@ -47,6 +47,14 @@ public class Vector {
 		return new Vector(x, y, z);
 	}
 	
+	public static Vector orthogonal(Vector v1, Vector v2){
+		double x = v1.x * v2.z;
+		double y = v1.z * v2.x - v1.x * v2.z;
+		double z = v1.x * v2.y - v1.y * v2.x;
+		
+		return new Vector(x,y,z);
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("X:%f, Y:%f, Z:%f", x, y, z);

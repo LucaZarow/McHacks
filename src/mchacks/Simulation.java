@@ -1,7 +1,6 @@
 package mchacks;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
@@ -29,20 +28,39 @@ public class Simulation implements Runnable {
 		b3.setVel(new Vector(0, 0, 0));
 		bodies.add(b3);
 		
-		for(int i = 0; i < 200; i++) {
+		for(int i = 0; i < 400; i++) {
 			double randomMass = Physics.EARTH_MASS / 2 + (Math.random() * Physics.EARTH_MASS / 2);
 			
 			double randomPosX = (2 * Math.random() * Physics.AU) - Physics.AU;
 			double randomPosY = (2 * Math.random() * Physics.AU) - Physics.AU;
 			double randomPosZ = (2 * Math.random() * Physics.AU) - Physics.AU;
 			
-			double randomVelX = (2 * Math.random() * 30000) - 15000;
-			double randomVelY = (2 * Math.random() * 30000) - 15000;
-			double randomVelZ = (2 * Math.random() * 30000) - 15000;
+			//double randomVelX = (2 * Math.random() * 30000) - 15000;
+			//double randomVelY = (2 * Math.random() * 30000) - 15000;
+			//double randomVelZ = (2 * Math.random() * 30000) - 15000;
 			
 			Body b = new Body(randomMass, Physics.EARTH_RADIUS, 1);
 			b.setPos(new Vector(randomPosX, randomPosY, randomPosZ));
-			b.setVel(new Vector(randomVelX, randomVelY, randomVelZ));
+			
+			Vector vel = new Vector(-b.getPos().y, b.getPos().x, 0);
+			vel = Vector.product(Physics.circularOrbit(b3, b.getPos().getMagnitude()), vel.getUnitVector());
+			
+			System.out.println(vel);
+			b.setVel(vel);
+			
+			/*
+			if(b.getPos().x < b3.getPos().x) {
+				if(b.getPos().y < b3.getPos().y) 
+					b.setVel(new Vector(-300, 300, 0));
+				else
+					b.setVel(new Vector(300, 300, 0));
+			} else {
+				if(b.getPos().y < b3.getPos().y)
+					b.setVel(new Vector(-300, -300, 0));
+				else
+					b.setVel(new Vector(300, -300, 0));
+			}
+			*/
 			
 			bodies.add(b);
 		}
@@ -162,7 +180,7 @@ public class Simulation implements Runnable {
 				updatesPerSecond = 0;
 				framesPerSecond = 0;
 			}
-			update(dt * 3600);
+			update(dt * 360000);
 			
 			//Sleep
 			try {
