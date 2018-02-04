@@ -43,43 +43,41 @@ public class SolarSystem {
 		bodies.add(sun);
 		
 		Body mercury = new Body(3.301*Math.pow(10, 23),4879000, 0.241);
-		sun.setPos(new Vector(46*Math.pow(10, 6), 0, 0));
-		sun.setVel(new Vector(0, 0, 0));
+		mercury.setPos(new Vector(46*Math.pow(10, 9), 0, 0));
+		mercury.setVel(new Vector(0, 58.98*Math.pow(10, 9), 0));
 		bodies.add(mercury);
 		
 		Body venus = new Body(4.867*Math.pow(10, 24),12104000, 0.615);
-		sun.setPos(new Vector(107.5*Math.pow(10, 6), 0, 0));
-		sun.setVel(new Vector(0, 0, 0));
+		venus.setPos(new Vector(107.5*Math.pow(10, 9), 0, 0));
+		venus.setVel(new Vector(0, 35.26*Math.pow(10, 9), 0));
 		bodies.add(venus);
 
-
 		Body earth = new Body(Physics.EARTH_MASS, Physics.EARTH_RADIUS, 1);
-		sun.setPos(new Vector(147.146*Math.pow(10, 6), 0, 0));
-		sun.setVel(new Vector(0, 0, 0));
+		earth.setPos(new Vector(147.146*Math.pow(10, 9), 0, 0));
+		earth.setVel(new Vector(0, 30.29*Math.pow(10, 9), 0));
 		bodies.add(earth);
 		
-
 		Body mars = new Body(6.417*Math.pow(10, 23),6792000, 1.881);
-		sun.setPos(new Vector (206.646*Math.pow(10, 6), 0, 0));
-		sun.setVel(new Vector(0, 0, 0));
+		mars.setPos(new Vector (206.646*Math.pow(10, 9), 0, 0));
+		mars.setVel(new Vector(0, 26.50*Math.pow(10, 9), 0));
 		bodies.add(mars);
 
 		Body jupiter = new Body(1.899*Math.pow(10, 27), 142984000, 11.86);
-		sun.setPos(new Vector(740.546*Math.pow(10, 6), 0, 0));
-		sun.setVel(new Vector(0, 0, 0));
+		jupiter.setPos(new Vector(740.546*Math.pow(10, 9), 0, 0));
+		jupiter.setVel(new Vector(0, 13.72*Math.pow(10, 9), 0));
 		bodies.add(jupiter);
-		
 
 		Body uranus= new Body(8.682*Math.pow(10, 25), 51118000, 29.46);
-		sun.setPos(new Vector(1352.646*Math.pow(10, 6), 0, 0));
-		sun.setVel(new Vector(0, 0, 0));
+		uranus.setPos(new Vector(1352.646*Math.pow(10, 9), 0, 0));
+		uranus.setVel(new Vector(0, 7.11*Math.pow(10, 9), 0));
 		bodies.add(uranus);
 
 		Body neptune = new Body(1.024*Math.pow(10, 26), 1638000, 84.01);
-		sun.setPos(new Vector(2741.346*Math.pow(10, 6), 0, 0));
-		sun.setVel(new Vector(0, 0, 0));
+		neptune.setPos(new Vector(2741.346*Math.pow(10, 9), 0, 0));
+		neptune.setVel(new Vector(0, 5.50*Math.pow(10, 9), 0));
 		bodies.add(neptune);
 		
 		return bodies;
 	}
 }
+	
