@@ -24,7 +24,7 @@ public class Simulation implements Runnable {
 	JPanel panel;
 	
 	public Simulation() {
-		bodies = SolarSystem.randomPlanetoids();
+		bodies = SolarSystem.solSystem();
 		
 		frame = new JFrame();
 		frame.setVisible(true);

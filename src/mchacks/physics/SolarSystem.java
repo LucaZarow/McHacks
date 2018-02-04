@@ -73,13 +73,11 @@ public class SolarSystem {
 		sun.setVel(new Vector(0, 0, 0));
 		bodies.add(venus);
 
-
 		Body earth = new Body(Physics.EARTH_MASS, Physics.EARTH_RADIUS, 1);
 		sun.setPos(new Vector(147.146*Math.pow(10, 6), 0, 0));
 		sun.setVel(new Vector(0, 0, 0));
 		bodies.add(earth);
 		
-
 		Body mars = new Body(6.417*Math.pow(10, 23),6792000, 1.881);
 		sun.setPos(new Vector (206.646*Math.pow(10, 6), 0, 0));
 		sun.setVel(new Vector(0, 0, 0));
@@ -90,7 +88,6 @@ public class SolarSystem {
 		sun.setVel(new Vector(0, 0, 0));
 		bodies.add(jupiter);
 		
-
 		Body uranus= new Body(8.682*Math.pow(10, 25), 51118000, 29.46);
 		sun.setPos(new Vector(1352.646*Math.pow(10, 6), 0, 0));
 		sun.setVel(new Vector(0, 0, 0));
