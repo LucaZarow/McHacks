@@ -75,7 +75,7 @@ public class GraphicsApp implements GLEventListener {
     }
     
     @Override
-    public void display(GLAutoDrawable drawable) {
+    public void display(GLAutoDrawable drawable) {    	
         GL2 gl = drawable.getGL().getGL2();
         gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
         tbc.prepareForDisplay(drawable);

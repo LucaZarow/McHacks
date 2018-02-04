@@ -18,7 +18,7 @@ public class Simulation implements Runnable {
 	public ArrayList<Body> bodies;
 	
 	public Simulation() {
-		bodies = SolarSystem.randomPlanetoids();
+		bodies = SolarSystem.randomPlanetoids(400);
 	}
 	
 	public void start() {
@@ -26,43 +26,42 @@ public class Simulation implements Runnable {
 		running = true;
 		this.run();
 	}
-	
-	public void stop() {
-
+		public void stop() {
 			bodies=null;
 	}
-	
-	private void update(double dt) {
+
+	private void update(double dt) {	
 		outerloop: for(Body b1 : bodies) {
 			for(Body b2 : bodies) {
 				if(b1 == b2) continue;
 				b1.applyDeltaAcc(Physics.gravity(b1, b2));
 				
+				/*
 				//Check collisions
 				if(b1.hasCollided(b2)) {					
-					Body b3 = new Body();
-					
 					//New mass
-					b3.setMass(b1.getMass() + b2.getMass());
+					double mass = b1.getMass() + b2.getMass();
 					
 					//New radius
-					b3.setRadius(Math.pow(Math.pow(b1.getRadius(), 3) + Math.pow(b2.getRadius(), 3), 0.3333));
+					double radius = Math.pow(Math.pow(b1.getRadius(), 3) + Math.pow(b2.getRadius(), 3), 0.3333);
 					
 					//New velocity
 					Vector resultant = Vector.sum(Vector.product(b1.getMass(), b1.getVel()), Vector.product(b2.getMass(), b2.getVel()));
 					resultant = Vector.product(1.0 / (b1.getMass() * b2.getMass()), resultant);
-					b3.setVel(resultant);
 					
 					//New position
-					b3.setPos(b1.getPos());
+					b1.setMass(mass);
+					b1.setRadius(radius);
+					b1.setVel(resultant);
 					
-					bodies.remove(b1);
 					bodies.remove(b2);
-					bodies.add(b3);
+					//b2 = null;
+					
 					break outerloop;
 				}
+				*/
 			}
-			
+				
 			b1.update(dt);
 		}
 	}

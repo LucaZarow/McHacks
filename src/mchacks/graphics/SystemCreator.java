@@ -14,7 +14,7 @@ public class SystemCreator {
 	static public ArrayList<GraphicBody> gBodies = new ArrayList<GraphicBody>();
 	
 	static public GraphicNode create(ArrayList<Body> bodies) {
-		Body body = new Body(1,1,1);
+		Body body = new Body(1,1);
 		Vector colour = new Vector(1,1,1);
 		double mass;
 		

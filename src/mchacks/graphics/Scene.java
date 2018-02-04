@@ -29,34 +29,44 @@ import mintools.swing.VerticalFlowPanel;
 
 import mchacks.physics.Body;
 
+import mchacks.Simulation;
+
+
 public class Scene {
 
     
     private GraphicNode root = null;
     
+    private ArrayList<Body> bodies;
+    
+    private Simulation sim;
+    
     private List<DoubleParameter> dofList = new ArrayList<DoubleParameter>();
 
-//    private JPanel vfpPosePanel; 
+    private JPanel vfpPosePanel; 
     
     private VerticalFlowPanel vfpPose = new VerticalFlowPanel();
 
-	public Scene(ArrayList<Body> bodies) {
-    	createBody( bodies);
+	public Scene(Simulation s, ArrayList<Body> b) {
+		bodies = b;
+		sim = s;
+    	createBody( b);
 	}
 	
 	public void display( GLAutoDrawable drawable ) {
         if ( root != null ) 
         	root.display(drawable);
 	}
-/*																		//try to resolve
+																		//try to resolve
     public JPanel getControls() {
     	VerticalFlowPanel vfp = new VerticalFlowPanel();
     	
-    	JButton recreate = new JButton("recreate character");
+    	JButton recreate = new JButton("Recreate system");
     	recreate.addActionListener( new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				createBody();
+					sim.stop();
+					root=null;
 			}
 		});
     	vfp.add(recreate);
@@ -67,7 +77,7 @@ public class Scene {
     	return vfp.getPanel();
     }
 
-	*/
+	
 
     public void createBody(ArrayList<Body> bodies) {
         dofList.clear();

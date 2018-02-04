@@ -6,9 +6,6 @@ public class Body {
 	private double mass; //kg 
 	private double radius; //m
 	
-	private double rotation;
-	private double rotationSpeed;
-	
 	private Vector pos;
 	private Vector vel;
 	private Vector acc;
@@ -23,20 +20,15 @@ public class Body {
 		
 		this.mass = 0.0;
 		this.radius = 0.0;
-
-		this.rotation = 0.0;
-		this.rotationSpeed = 0.0;
 	}
 	
-	public Body(double mass, double radius, double period){
+	public Body(double mass, double radius){
 		this.pos = new Vector();
 		this.vel = new Vector();
 		this.acc = new Vector();
 		
 		this.mass = mass;
 		this.radius = radius;
-		
-		this.rotationSpeed = (2 * Math.PI * radius) / period;
 	}
 	
 	public void applyDeltaAcc(Vector deltaAcc) {
@@ -56,7 +48,7 @@ public class Body {
 	public boolean hasCollided(Body b) {
 		double distance = Vector.minus(this.getPos(), b.getPos()).getMagnitude();
 		
-		return distance < this.radius + b.getRadius();
+		return distance < (this.radius + b.getRadius() * 10);
 	}
 	
 	public double getMass () {
