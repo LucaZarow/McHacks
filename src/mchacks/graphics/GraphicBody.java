@@ -33,7 +33,7 @@ public class GraphicBody extends GraphicNode{
 	Body body;
 	
 	
-	public GraphicBody(String name, Body initBody, float alpha){
+	public GraphicBody(String name, Body initBody, Vector colour, float alpha){
 		super(name);
 /*		dofs.add( txD = new DoubleParameter( name+" txD", 0, -10, 10 ) );		
 		dofs.add( tyD = new DoubleParameter( name+" tyD", 0, -10, 10 ) );
@@ -52,9 +52,9 @@ public class GraphicBody extends GraphicNode{
 		tz=vec.z/scalePos;
 		s=initBody.getRadius()/scaleSize;
 		
-		r=Math.random();
-		g=Math.random();
-		b=Math.random();
+		r=colour.x;
+		g=colour.y;
+		b=colour.z;
 		a = alpha ;
 	}
 	
