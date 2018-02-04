@@ -10,7 +10,7 @@ public class SolarSystem {
 	public static ArrayList<Body> randomPlanetoids(int num) {
 		ArrayList<Body> bodies = new ArrayList<Body>();
 		
-		Body sun = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS);
+		Body sun = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS * 8);
 		sun.setPos(new Vector(0, 0, 0));
 		sun.setVel(new Vector(0, 0, 0));
 		bodies.add(sun);
@@ -30,7 +30,7 @@ public class SolarSystem {
 			double randomPosZ = (2 * Math.random() * Physics.AU) - Physics.AU;
 			//double randomPosZ = 0;
 			
-			Body b = new Body(randomMass, Physics.EARTH_RADIUS);
+			Body b = new Body(randomMass, Physics.EARTH_RADIUS * (1 + massRandomizer));
 			b.setPos(new Vector(randomPosX, randomPosY, randomPosZ));
 			
 			Vector vel = new Vector(-b.getPos().y, b.getPos().x, 0);
@@ -43,12 +43,10 @@ public class SolarSystem {
 		return bodies;
 	}
 	
-	public static ArrayList<Body> randomDisk() {
+	public static ArrayList<Body> randomDisk(int num) {
 		ArrayList<Body> bodies = new ArrayList<Body>();
 		
-		int num = 10;
-		
-		Body sun = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS);
+		Body sun = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS * 8);
 		sun.setPos(new Vector(0, 0, 0));
 		sun.setVel(new Vector(0, 0, 0));
 		bodies.add(sun);
@@ -68,7 +66,7 @@ public class SolarSystem {
 			//double randomPosZ = (2 * Math.random() * Physics.AU) - Physics.AU;
 			double randomPosZ = 0;
 			
-			Body b = new Body(randomMass, Physics.EARTH_RADIUS);
+			Body b = new Body(randomMass, Physics.EARTH_RADIUS * (1 + massRandomizer));
 			b.setPos(new Vector(randomPosX, randomPosY, randomPosZ));
 			
 			Vector vel = new Vector(-b.getPos().y, b.getPos().x, 0);

@@ -18,7 +18,7 @@ public class Simulation implements Runnable {
 	public ArrayList<Body> bodies;
 	
 	public Simulation() {
-		bodies = SolarSystem.randomDisk();
+		bodies = SolarSystem.randomDisk(40);
 	}
 	
 	public void start() {
