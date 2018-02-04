@@ -56,7 +56,7 @@ public class Body {
 	public boolean hasCollided(Body b) {
 		double distance = Vector.minus(this.getPos(), b.getPos()).getMagnitude();
 		
-		return distance < this.radius + b.getRadius();
+		return distance < (this.radius + b.getRadius() * 10);
 	}
 	
 	public double getMass () {

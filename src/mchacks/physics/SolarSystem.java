@@ -7,7 +7,7 @@ import mchacks.util.Vector;
 public class SolarSystem {
 	public static double scale = 1490000000.0;
 	
-	public static ArrayList<Body> randomPlanetoids() {
+	public static ArrayList<Body> randomPlanetoids(int num) {
 		ArrayList<Body> bodies = new ArrayList<Body>();
 		
 		Body sun = new Body(Physics.SOLAR_MASS, Physics.EARTH_RADIUS, 1);
@@ -15,7 +15,7 @@ public class SolarSystem {
 		sun.setVel(new Vector(0, 0, 0));
 		bodies.add(sun);
 		
-		for(int i = 0; i < 300; i++) {
+		for(int i = 0; i < num; i++) {
 			double massRandomizer = Math.random() * 4;
 			double randomMass;
 			if(massRandomizer < 2)
@@ -27,13 +27,14 @@ public class SolarSystem {
 
 			double randomPosX = (2 * Math.random() * Physics.AU) - Physics.AU;
 			double randomPosY = (2 * Math.random() * Physics.AU) - Physics.AU;
-			double randomPosZ = (2 * Math.random() * Physics.AU) - Physics.AU;
+			//double randomPosZ = (2 * Math.random() * Physics.AU) - Physics.AU;
+			double randomPosZ = 0;
 			
 			Body b = new Body(randomMass, Physics.EARTH_RADIUS, 1);
 			b.setPos(new Vector(randomPosX, randomPosY, randomPosZ));
 			
 			Vector vel = new Vector(-b.getPos().y, b.getPos().x, 0);
-			vel = Vector.product(Physics.circularOrbit(sun, b.getPos().getMagnitude()), vel.getUnitVector());
+			vel = Vector.product((0.3 + Math.random()) * Physics.circularOrbit(sun, b.getPos().getMagnitude()), vel.getUnitVector());
 			
 			b.setVel(vel);
 			

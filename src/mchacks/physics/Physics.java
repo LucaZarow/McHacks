@@ -23,6 +23,13 @@ public class Physics {
 		return Vector.product(-deltaAcc, position.getUnitVector());
 	}
 	
+	public static Vector gravity(Body b1, Vector pos2, double mass2) {
+		Vector position = Vector.minus(b1.getPos(), pos2);
+		double deltaAcc = G * (mass2) / (position.getMagnitude() * position.getMagnitude());
+		
+		return Vector.product(-deltaAcc, position.getUnitVector());
+	}
+	
 	public static double rocheLimit (Body b1, Body b2){
 		double b1Density = b1.getMass()/(4/3)*Math.PI*Math.pow(b1.getRadius(), 3);
 		double b2Density = b2.getMass()/(4/3)*Math.PI*Math.pow(b2.getRadius(), 3);

@@ -60,8 +60,6 @@ public class GraphicBody extends GraphicNode{
 		
 		updatePosition();
 		
-		System.out.println("AAA   " + tx + " " + ty + " " + tz);
-		
 		GL2 gl = drawable.getGL().getGL2();
 	
 		gl.glPushMatrix();
