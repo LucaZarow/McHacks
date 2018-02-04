@@ -15,7 +15,7 @@ public class SolarSystem {
 		sun.setVel(new Vector(0, 0, 0));
 		bodies.add(sun);
 		
-		for(int i = 0; i < 400; i++) {
+		for(int i = 0; i < 300; i++) {
 			double randomMass = Physics.EARTH_MASS / 2 + (Math.random() * Physics.EARTH_MASS / 2);
 			
 			double randomPosX = (2 * Math.random() * Physics.AU) - Physics.AU;
