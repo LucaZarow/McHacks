@@ -22,7 +22,7 @@ public class GraphicBody extends GraphicNode{
 	double a;
 	
 	double scalePos = 	Math.pow(10, 6);
-	double scaleSize =		5000; 
+	double scaleSize =		20000; 
 	
 	Body body;
 	
@@ -75,7 +75,11 @@ public class GraphicBody extends GraphicNode{
 		
 		gl.glColor4d(r, g, b, a);
 	
-		glut.glutSolidSphere(1,20,20);
+//		if(r==1 && b==1){
+//			glut.glutSolidCylinder(1,2,20,1);
+//		}else{
+			glut.glutSolidSphere(1,20,20);
+//		}
 		
 		gl.glPopMatrix();
 		
